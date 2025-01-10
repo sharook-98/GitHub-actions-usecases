@@ -16,6 +16,6 @@ jobs:
 
     - name: list files cmd
       run: |
-        echo "List of files available in the repository (Main Branch)
+        echo "List of files available in the repository (Main Branch)"
         ls -ltr
 
