@@ -1,0 +1,17 @@
+name: Trigger the job manually
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  manual-trigger:
+    runs-on: ubunutu-latest
+
+    steps:
+      -  name: checkout event
+         uses: checkout@v2
+
+      -  name: manual trigger
+         run: |
+           echo "This job was triggered manually"
+      
