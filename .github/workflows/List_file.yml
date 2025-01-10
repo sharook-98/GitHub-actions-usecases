@@ -1,0 +1,21 @@
+name: List the files in the Repository
+
+on:
+ push:
+   branches:
+     - main
+ pull_request:
+   branches:
+   -   main
+jobs:
+  list_files:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkoutaction
+      uses: actions/checkout@v2
+
+    - name: list files cmd
+      run: |
+        echo "List of files available in the repository (Main Branch)
+        ls -ltr
+
