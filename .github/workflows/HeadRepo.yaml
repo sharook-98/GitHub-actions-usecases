@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: trigger another repo
-        uses: peter-evans/repository-dispatch@v2
+        uses: sharook-98/repository-dispatch@v2
         with:
           repository: sharook-98/TestRepo
           token: ${{ secrets.TOKEN }}
