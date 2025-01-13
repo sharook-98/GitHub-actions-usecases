@@ -17,4 +17,4 @@ jobs:
         with:
           repository: sharook-98/TestRepo
           token: ${{ secrets.TOKEN }}
-          event_type: my-event
+          event-type: trigger
