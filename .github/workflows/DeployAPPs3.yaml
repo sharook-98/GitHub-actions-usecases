@@ -25,6 +25,10 @@ jobs:
 
        env:
          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+
+     - name: display contents of bucket
+       run: aws s3 ls s3://$S3_BUCKET_NAME
+      
        
   
 
