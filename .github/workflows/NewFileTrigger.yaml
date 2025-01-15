@@ -3,7 +3,7 @@ name: trigger when new files are added to folder
 on:
   push:
     paths:
-      - Project 1/**
+      - Project_1/**
 
 jobs:
   NewFileTrigger:
@@ -15,7 +15,7 @@ jobs:
       - name: new files added
         run: |
           echo "Listing files in folder"
-          ls -R Project 1
+          ls -R Project_1
 
       - name: add new files
         run: echo " add new files in project 1 folder "
