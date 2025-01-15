@@ -3,10 +3,10 @@ name: List the files in the Repository
 on:
  push:
    branches:
-     - main
- pull_request:
-   branches:
-   -   main
+    main
+     paths:
+      main/List_file.yml
+      
 jobs:
   list_files:
     runs-on: ubuntu-latest
