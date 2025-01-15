@@ -47,7 +47,7 @@ jobs:
      - name: Add SSH Key
        run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > test.pem
-          chmod 400 github.pem
+          chmod 400 test.pem
  
       # Run commands on EC2 instance
      - name: Run Command on EC2
