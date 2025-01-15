@@ -1,0 +1,27 @@
+name: Run ansible
+
+on:
+  push:
+    paths:
+      - .github/workflows/ansiblerun.yaml
+
+jobs:
+  run-ansible:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: setup ansible
+        run: |
+          sudo apt update
+          sudo apt install -y software-properties-common
+          sudo add-apt-repository --yes --update ppa:ansible/ansible
+          sudo apt install -y ansible
+          
+          
