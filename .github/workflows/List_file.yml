@@ -2,9 +2,7 @@ name: List the files in the Repository
 
 on:
  push:
-   branches:
-    main
-     paths:
+   paths:
       main/List_file.yml
       
 jobs:
