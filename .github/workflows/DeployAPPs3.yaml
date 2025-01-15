@@ -46,13 +46,13 @@ jobs:
  
      - name: Add SSH Key
        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > github.pem
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > test.pem
           chmod 400 github.pem
  
       # Run commands on EC2 instance
      - name: Run Command on EC2
        run: |
-          ssh -o StrictHostKeyChecking=no -i github.pem ubuntu@${{ secrets.EC2_PUBLIC_DNS }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i test.pem ubuntu@${{ secrets.EC2_PUBLIC_DNS }} << 'EOF'
           echo "Running commands on EC2 instance"
           sudo docker pull new-image:latest
           sudo docker run -d -p 80:80 new-image:latest
