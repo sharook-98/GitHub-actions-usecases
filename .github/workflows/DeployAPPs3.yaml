@@ -54,6 +54,7 @@ jobs:
        run: |
           ssh -o StrictHostKeyChecking=no -i test.pem ubuntu@${{ secrets.EC2_PUBLIC_DNS }} << 'EOF'
           echo "Running commands on EC2 instance"
+          sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
           sudo docker pull new-image:latest
           sudo docker run -d -p 80:80 new-image:latest
           EOF
