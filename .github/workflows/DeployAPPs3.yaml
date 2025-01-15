@@ -20,8 +20,8 @@ jobs:
          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
          aws-region: ${{ secrets.AWS_REGION }}
 
-     - name: sync s3
-       run: aws s3 sync ./ s3://$S3_BUCKET_NAME --delete --acl public-read
+     #- name: sync s3
+      # run: aws s3 sync ./ s3://$S3_BUCKET_NAME --delete --acl public-read
 
        env:
          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
