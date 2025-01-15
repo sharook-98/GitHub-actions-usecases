@@ -2,8 +2,12 @@ name: Deploy application to S3
 
 on:
   push:
-    paths:
-      - .github/workflows/DeployAPPs3.yaml
+    branches:
+      main
+
+  pull_request:
+    branches:
+      main
 
 jobs:
   deploy-to-s3:
