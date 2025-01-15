@@ -3,7 +3,7 @@ name: List the files in the Repository
 on:
  push:
    paths:
-      - List_file.yml
+      - .github/workflows/List_file.yml
       
 jobs:
   list_files:
