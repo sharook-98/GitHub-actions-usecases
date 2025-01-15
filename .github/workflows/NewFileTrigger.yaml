@@ -16,7 +16,4 @@ jobs:
         run: |
           echo "Listing files in folder"
           ls -R Project_1
-
-      - name: add new files
-        run: echo " add new files in project 1 folder "
   
