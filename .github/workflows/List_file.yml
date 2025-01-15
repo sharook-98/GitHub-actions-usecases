@@ -14,6 +14,6 @@ jobs:
 
     - name: list files cmd
       run: |
-        echo "List of files available in the repo (Main Branch)"
+        echo "List of files available in the githib repository (Main Branch)"
         ls -ltr
 
