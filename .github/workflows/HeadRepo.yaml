@@ -20,7 +20,7 @@ jobs:
         run: |
           #setting up the required variable
           repo_owner="sharook-1998"
-          repo_name="TestRepo"
+          repo_name="TestRepo/.github/workflows/child.yml"
           event_type="trigger-workflow"
 
           curl -L \
