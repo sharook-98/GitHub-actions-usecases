@@ -2,8 +2,8 @@ name: Trigger child repo
 
 on:
   push:
-    paths:
-      - .github/workflow/HeadRepo.yaml
+    branches:
+      main
   pull_request:
     branches:
       main
