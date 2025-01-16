@@ -63,6 +63,7 @@ jobs:
        run: |
           ssh -o StrictHostKeyChecking=no -i test.pem ubuntu@${{ secrets.EC2_PUBLIC_DNS }} << 'EOF'
           echo "Running commands on EC2 instance"
+          sudo docker login -u sharook1998
           sudo docker pull new-image:latest
           sudo docker run -d -p 80:80 new-image:latest
           EOF
