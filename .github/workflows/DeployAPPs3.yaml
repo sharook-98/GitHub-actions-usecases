@@ -27,10 +27,10 @@ jobs:
          password: ${{ secrets.DOCKER_PASSWORD }}
 
      - name: docker build
-       run: docker build -t ${{ secrets.DOCKER_USERNAME }}sharook1998/new-image:${{ github.sha }} .
+       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/new-image:${{ github.sha }} .
 
      - name: docker push
-       run: docker push ${{ secrets.DOCKER_USERNAME }}sharook1998/new-image:${{ github.sha }}
+       run: docker push ${{ secrets.DOCKER_USERNAME }}/new-image:${{ github.sha }}
 
   deploy_to_s3:
     runs-on: ubuntu-latest
@@ -57,8 +57,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install docker.io -y
           sudo systemctl start docker
-          sudo docker pull new-image:latest
-          sudo docker run -d -p 80:80 new-image:latest
+          sudo docker pull sharook1998/new-image:latest
+          sudo docker run -d -p 80:80 sharook1998/new-image:latest
           EOF
 
      - name: setup aws cli
