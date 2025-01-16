@@ -2,8 +2,8 @@ name: Trigger child repo
 
 on:
   push:
-    branches:
-      main
+    paths:
+      - .github/workflow/HeadRepo.yaml
   pull_request:
     branches:
       main
@@ -12,6 +12,9 @@ jobs:
   trigger-repo:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        
       - name: trigger another repo
         uses: peter-evans/repository-dispatch@v2
         with:
