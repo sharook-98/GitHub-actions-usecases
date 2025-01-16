@@ -27,10 +27,10 @@ jobs:
          password: ${{ secrets.DOCKER_PASSWORD }}
 
      - name: docker build
-       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/new-image:${{ github.sha }} .
+       run: docker build -t ${{ secrets.DOCKER_USERNAME }}sharook1998/new-image:${{ github.sha }} .
 
      - name: docker push
-       run: docker push ${{ secrets.DOCKER_USERNAME }}/new-image:${{ github.sha }}
+       run: docker push ${{ secrets.DOCKER_USERNAME }}sharook1998/new-image:${{ github.sha }}
 
   deploy_to_s3:
     runs-on: ubuntu-latest
