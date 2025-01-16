@@ -65,7 +65,7 @@ jobs:
           echo "Running commands on EC2 instance"
           sudo docker login -u sharook1998
           sudo docker pull sharook1998/new-image:latest
-          sudo docker run -d -p 80:80 new-image:latest
+          sudo docker run -d -p 80:80 sharook1998/new-image:latest
           EOF
 
      
