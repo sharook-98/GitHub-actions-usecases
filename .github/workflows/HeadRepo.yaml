@@ -20,5 +20,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.TOKEN }}
-          repository: sharook-98/TeatRepo  # Replace with the target repo's details
+          repository: sharook-98/TestRepo  # Replace with the target repo's details
           event-type: trigger-workflow
