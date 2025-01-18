@@ -55,7 +55,7 @@ jobs:
           
       - name : run docker and k8s installation commands
         run : |
-          ssh -o StrictHostKeyChecking=no -i test.pem ubuntu@ec2-44-220-154-45.compute-1.amazonaws.com << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i test.pem ubuntu@ec2-3-80-77-136.compute-1.amazonaws.com << 'EOF'
           echo "Running Docker installation commands on EC2 instance"
           sudo apt-get update
           sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
