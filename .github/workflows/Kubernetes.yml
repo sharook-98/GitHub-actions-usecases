@@ -82,3 +82,4 @@ jobs:
           kubectl version --client
           kubectl get nodes
           kubectl run test-image --image=sharook1998/k8s
+          EOF
