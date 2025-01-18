@@ -56,4 +56,14 @@ jobs:
       - name : run k8s commands for installation
         run : |
           ssh -o StrictHostKeyChecking=no -i test.pem ec2-user@ec2-18-234-219-65.compute-1.amazonaws.com << 'EOF'
-          echo "Running commands on EC2 instance"
+          echo "Running Docker installation commands on EC2 instance"
+          sudo apt-get update
+          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+          sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+          sudo apt-get update
+          sudo apt-get install -y docker-ce
+          sudo systemctl status docker
+          
+
+          
