@@ -72,7 +72,7 @@ jobs:
           sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           sudo chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-          kubectl config set-context kind-kind
+          kubectl config use-context kind-kind
           kubectl get nodes
           kubectl run test-image --image=sharook1998/k8s
           EOF
