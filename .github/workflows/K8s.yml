@@ -34,4 +34,4 @@ jobs:
 
       - name: run Kubectl commands
         run: |
-          kubectl run Test --image:sharook1998/k8s --port:80
+          kubectl run Test --image=sharook1998/k8s --port:80
