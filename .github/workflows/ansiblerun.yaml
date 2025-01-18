@@ -4,7 +4,7 @@ on:
   push:
     branches:
       main
-  
+
 jobs:
   run-ansible:
     runs-on: ubuntu-latest
@@ -22,9 +22,24 @@ jobs:
           sudo apt update
           sudo apt install -y ansible
 
+      - name: Install SSH Client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssh-client
+
+      - name: setup ssh key for ansible
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > github.pem
+          chmod 400 github.pem
+          ssh -o StrictHostKeyChecking=no -i github.pem ubuntu@${{ secrets.EC2_PUBLIC_DNS }}
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ec2-52-91-222-15.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+
       - name: run ansible
-        run: ansible-playbook -i inventory playbook.yml
-        env: 
-          ANSIBLE_HOST_KEY_CHECKING: 'false'
+        run: |
+          ansible-playbook -i inventory.ini playbook.yml
+        
           
           
