@@ -19,13 +19,11 @@ jobs:
         git config --global user.email "sharookk98@gmail.com"
 
     - name: Get version from file
-      id: get_version
       run: |
         VERSION=$(cat version.txt)
         echo "::set-output name=VERSION::$VERSION"
 
     - name: Create Release
-      id: create_release
       uses: actions/create-release@v1
       with:
         tag_name: app
