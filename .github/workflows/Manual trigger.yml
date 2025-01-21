@@ -2,6 +2,7 @@ name: Trigger the job manually
 
 on:
   workflow_dispatch:
+  #manual trigger
   
 jobs:
   manual_job:
