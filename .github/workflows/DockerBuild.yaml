@@ -3,7 +3,7 @@ name: Docker build and push workflow
 on:
   push:
     paths:
-      - Dockefile
+      - Dockerfile
   pull_request:
     branches:
       main
