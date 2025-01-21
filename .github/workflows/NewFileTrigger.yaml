@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - Project_1/**
+      - dummy/**
 
 jobs:
   NewFileTrigger:
