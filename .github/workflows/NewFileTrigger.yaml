@@ -17,4 +17,5 @@ jobs:
         run: |
           echo "Listing files in folder"
           ls -R Project_1
+          ls -R dummy
   
