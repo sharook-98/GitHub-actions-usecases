@@ -3,7 +3,7 @@ name: Run Python script
 on:
   push:
     paths:
-      - .github/workflows/RunPYScript.yaml
+      - test.py
 
   pull_request:
     branches:
