@@ -1,19 +1,21 @@
 ---
-- name : sample ansible playbook
-  hosts : all
-  become : yes
-  tasks :
-    - name: Update apt package manager 
-      apt: 
+- name: Install Apache Server
+  hosts: all
+  become: yes
+ 
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
         update_cache: yes
-        
-    - name : install nginx
-      apt :
-        name : nginx
-        state : present
-
-    - name: start nginx
+        upgrade: dist
+ 
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+ 
+    - name: Ensure Apache is started and enabled at boot
       service:
-          name: nginx
-          state: started
-
+        name: apache2
+        state: started
+        enabled: yes
