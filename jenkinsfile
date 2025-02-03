@@ -4,24 +4,21 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'  // Set the region
         INSTANCE_ID = 'i-042a33b9af6b32067'  // EC2 instance ID
-        SSH_KEY_PATH = '/path/to/your/private/key'  // SSH private key path
+        SSH_KEY_PATH = 'pem/test.pem'  // SSH private key path
         SSH_USER = 'ubuntu'  // Ubuntu default user
-        EC2_PUBLIC_IP = 'xx.xx.xx.xx'  // EC2 instance public IP
+        EC2_PUBLIC_IP = '54.145.239.52'  // EC2 instance public IP
     }
 
     stages {
         stage('Restart EC2 Instance') {
             steps {
                 script {
-                    // Option 1: Using AWS CLI to restart the EC2 instance
-                    sh "aws ec2 reboot-instances --instance-ids ${INSTANCE_ID} --region ${AWS_REGION}"
                     
-                    // Option 2: Using SSH to restart the remote Ubuntu EC2 instance
-                    // Ensure you have SSH agent properly configured in Jenkins
-                    sshagent(['your-ssh-credentials-id']) {
-                        sh """
-                            ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH} ${SSH_USER}@${EC2_PUBLIC_IP} 'sudo reboot'
-                        """
+                    
+                    
+                    withAWS(credentials: 'aws-credentials', region: AWS_REGION) {
+                        // Option 1: Restart EC2 instance using AWS CLI
+                        sh "aws ec2 reboot-instances --instance-ids ${INSTANCE_ID} --region ${AWS_REGION}"
                     }
                 }
             }
