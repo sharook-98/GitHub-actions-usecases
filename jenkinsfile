@@ -16,7 +16,7 @@ pipeline {
                     
                     
                     
-                    withAWS(credentials: 'aws-credentials', region: AWS_REGION) {
+                    withAWS(credentials: 'AWS-Credentials', region: AWS_REGION) {
                         // Option 1: Restart EC2 instance using AWS CLI
                         sh "aws ec2 reboot-instances --instance-ids ${INSTANCE_ID} --region ${AWS_REGION}"
                     }
