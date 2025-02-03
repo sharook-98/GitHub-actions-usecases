@@ -6,7 +6,7 @@ pipeline {
         INSTANCE_ID = 'i-042a33b9af6b32067'  // EC2 instance ID
         SSH_KEY_PATH = 'pem/test.pem'  // SSH private key path
         SSH_USER = 'ubuntu'  // Ubuntu default user
-        EC2_PUBLIC_IP = '54.145.239.52'  // EC2 instance public IP
+        EC2_PUBLIC_IP = '100.25.199.250'  // EC2 instance public IP
     }
 
     stages {
