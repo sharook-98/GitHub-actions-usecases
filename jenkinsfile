@@ -21,7 +21,7 @@ pipeline {
                      // Option 2: Restart EC2 instance via SSH (If you prefer SSH method)
                         sshagent(['ssh']) {
                             sh """
-                                ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH} ${SSH_USER}@${EC2_PUBLIC_IP} 'sudo systemctl restart tomcat
+                                ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH} ${SSH_USER}@${EC2_PUBLIC_IP} 'sudo systemctl restart tomcat'
 '
                             """
                     }
