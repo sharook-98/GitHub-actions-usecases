@@ -3,7 +3,7 @@
   hosts: all
   become: true
   vars:
-    tomcat_version: 9.0.53
+    tomcat_version: 9.0.98
     tomcat_url: "https://downloads.apache.org/tomcat/tomcat-9/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
     tomcat_install_dir: /opt/tomcat
     tomcat_service_name: tomcat
