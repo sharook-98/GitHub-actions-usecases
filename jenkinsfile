@@ -13,7 +13,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone your repository from Git (modify this step to match your repo)
-                git 'https://github.com/sharook-98/GitHub-actions-usecases.git'
+                git branch: 'main', url: 'https://github.com/sharook-98/GitHub-actions-usecases.git'
             }
         }
 
