@@ -39,8 +39,8 @@
         path: "{{ tomcat_install_dir }}/current"
         recurse: yes
         owner: root
-        group: tomcat
-        mode: '0755'
+        group: root
+        mode: '0777'
 
     - name: Start Tomcat
       systemd:
