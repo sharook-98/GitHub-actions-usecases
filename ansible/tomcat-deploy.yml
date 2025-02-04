@@ -38,7 +38,7 @@
       file:
         path: "{{ tomcat_install_dir }}/current"
         recurse: yes
-        owner: tomcat
+        owner: root
         group: tomcat
         mode: '0755'
 
