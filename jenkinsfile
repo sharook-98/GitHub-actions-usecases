@@ -7,17 +7,44 @@ pipeline {
         SSH_KEY_PATH = 'pem/test.pem'  // SSH private key path
         SSH_USER = 'ubuntu'  // Ubuntu default user
         EC2_PUBLIC_IP = '100.25.199.189'  // EC2 instance public IP
+        ARTIFACT_PATH=/home/ubuntu/artifact.war
+        REMOTE_PATH=/home/ubuntu/applications/
     }
 
     stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Build the Maven project
+                    sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // SCP and SSH commands to deploy the artifact
+                    sh '''
+                        scp -i $SSH_KEY_PATH $ARTIFACT_PATH $EC2_PUBLIC_IP:$REMOTE_PATH
+
+                        ssh -i $SSH_KEY_PATH $EC2_PUBLIC_IP << EOF
+                          sudo systemctl stop tomcat
+                          sudo cp $REMOTE_PATH/your-artifact.war /var/lib/tomcat9/webapps/
+                          sudo systemctl start tomcat
+                        EOF
+                    '''
+                }
+            }
+        }
+
         stage('Restart EC2 Instance') {
             steps {
                 script {
                         sshagent(['SSH-Ubuntu']) {
                             sh """
                                 ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH} ${SSH_USER}@${EC2_PUBLIC_IP} 'sudo systemctl restart tomcat
-                                sudo systemctl status tomcat
-'
+                                sudo systemctl status tomcat'
                             """
                     }
                 }
