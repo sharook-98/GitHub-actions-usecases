@@ -7,12 +7,14 @@ pipeline {
 
     stages {
         stage('Checkout') {
+            agent { label 'Ansible node' }
             steps {
                 git url: 'https://github.com/sharook-98/GitHub-actions-usecases.git', branch: 'main'
             }
         }
 
         stage('Install Dependencies') {
+            agent { label 'Ansible node' }
             steps {
                 script {
                     // Install Ansible and dependencies on the Jenkins node if not already installed
@@ -26,6 +28,7 @@ pipeline {
         }
 
         stage('Deploy Tomcat') {
+            agent { label 'Ansible node' }
             steps {
                 script {
                     // Run the Ansible playbook to deploy Tomcat on EC2 instance
