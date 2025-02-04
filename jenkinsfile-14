@@ -20,7 +20,7 @@ pipeline {
                     // Install Ansible and dependencies on the Jenkins node if not already installed
                     sh '''
                     sudo apt update
-                    sudo apt install -y ansible python3-pip
+                    sudo apt install -y ansible python3
                     pip3 install --user ansible
                     '''
                 }
