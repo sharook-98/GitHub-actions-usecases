@@ -2,41 +2,62 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = 'us-east-1'  // Set the region
-        INSTANCE_ID = 'i-042a33b9af6b32067'  // EC2 instance ID
-        SSH_KEY_PATH = 'pem/test.pem'  // SSH private key path
-        SSH_USER = 'ubuntu'  // Ubuntu default user
-        EC2_PUBLIC_IP = '100.25.199.189'  // EC2 instance public IP
-        ARTIFACT_PATH = '/home/ubuntu/artifact.war'
-        REMOTE_PATH = '/home/ubuntu/applications/'
+        // Set your environment variables here
+        ARTIFACT_PATH = "target/maven-artifact-1.0-SNAPSHOT.jar"
+        REMOTE_HOST = "ubuntu@100.25.199.189"
+        REMOTE_PATH = "/home/ubuntu/deployments"
+        SSH_PRIVATE_KEY = credentials('SSH-Ubuntu') // Jenkins credentials for the private key
     }
 
     stages {
+        stage('Clone Repository') {
+            steps {
+                // Clone your repository from Git (modify this step to match your repo)
+                git 'https://github.com/sharook-98/GitHub-actions-usecases.git'
+            }
+        }
+
         stage('Build') {
             steps {
+                // Build the Maven artifact
                 script {
-                    // Build the Maven project
                     sh 'mvn clean package'
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to EC2') {
             steps {
                 script {
-                    // SCP and SSH commands to deploy the artifact
-                    sh '''
-                        scp -i $SSH_KEY_PATH $ARTIFACT_PATH $EC2_PUBLIC_IP:$REMOTE_PATH
+                    // SCP the artifact to the remote EC2 machine
+                    sh """
+                    scp -i ${SSH_PRIVATE_KEY} ${ARTIFACT_PATH} ${REMOTE_HOST}:${REMOTE_PATH}
+                    """
+                    
+                    // SSH into EC2 to deploy the artifact
+                    sh """
+                    ssh -i ${SSH_PRIVATE_KEY} ${REMOTE_HOST} << EOF
+                        # Stop the existing service (if running)
+                        sudo systemctl stop tomcat
 
-                        ssh -i $SSH_KEY_PATH $EC2_PUBLIC_IP << EOF
-                          sudo systemctl stop tomcat
-                          sudo cp $REMOTE_PATH/your-artifact.war /var/lib/tomcat9/webapps/
-                          sudo systemctl start tomcat
-                        EOF
-                    '''
+                        # Replace the old artifact with the new one
+                        sudo cp ${REMOTE_PATH}/maven-artifact-1.0-SNAPSHOT.jar /opt/tomcat/webapps/
+
+                        # Start the service again
+                        sudo systemctl start tomcat
+                    EOF
+                    """
                 }
             }
         }
     }
-}
 
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+}
