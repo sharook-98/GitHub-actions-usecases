@@ -36,7 +36,7 @@ pipeline {
                     
                     // SSH into EC2 to deploy the artifact
                     sh """
-                    ssh -i ${SSH_PRIVATE_KEY} ${REMOTE_HOST} << EOF
+                    ssh -i ${SSH_PRIVATE_KEY} ${REMOTE_HOST} << "EOF"
                         # Stop the existing service (if running)
                         sudo systemctl stop tomcat
 
