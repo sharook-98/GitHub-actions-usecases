@@ -36,16 +36,16 @@ pipeline {
                     
                     // SSH into EC2 to deploy the artifact
                     sh """
-                    ssh -i ${SSH_PRIVATE_KEY} ${REMOTE_HOST} << "EOF"
-                        # Stop the existing service (if running)
-                        sudo systemctl stop tomcat
+                        ssh -i ${SSH_PRIVATE_KEY} ${REMOTE_HOST} << "EOF"
+                            # Stop the existing service (if running)
+                            sudo systemctl stop tomcat
 
-                        # Replace the old artifact with the new one
-                        sudo cp ${REMOTE_PATH}/maven-artifact-1.0-SNAPSHOT.jar /opt/tomcat/webapps/
+                            # Replace the old artifact with the new one
+                            sudo cp ${REMOTE_PATH}/maven-artifact-1.0-SNAPSHOT.jar /opt/tomcat/webapps/
 
-                        # Start the service again
-                        sudo systemctl start tomcat
-                    EOF
+                            # Start the service again
+                            sudo systemctl start tomcat
+                        EOF
                     """
                 }
             }
