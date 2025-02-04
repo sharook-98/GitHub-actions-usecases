@@ -1,0 +1,49 @@
+---
+- name: Deploy Tomcat Server
+  hosts: all
+  become: true
+  vars:
+    tomcat_version: 9.0.53
+    tomcat_url: "https://downloads.apache.org/tomcat/tomcat-9/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    tomcat_install_dir: /opt/tomcat
+    tomcat_service_name: tomcat
+
+  tasks:
+    - name: Install required dependencies
+      apt:
+        name:
+          - openjdk-11-jdk
+          - wget
+        state: present
+        update_cache: yes
+
+    - name: Download Tomcat
+      get_url:
+        url: "{{ tomcat_url }}"
+        dest: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
+
+    - name: Extract Tomcat
+      unarchive:
+        src: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        dest: "{{ tomcat_install_dir }}"
+        remote_src: yes
+
+    - name: Create symlink to tomcat
+      file:
+        src: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
+        dest: "{{ tomcat_install_dir }}/current"
+        state: link
+
+    - name: Set permissions for tomcat directory
+      file:
+        path: "{{ tomcat_install_dir }}/current"
+        recurse: yes
+        owner: tomcat
+        group: tomcat
+        mode: '0755'
+
+    - name: Start Tomcat
+      systemd:
+        name: tomcat
+        state: started
+        enabled: yes
