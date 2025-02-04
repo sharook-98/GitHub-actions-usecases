@@ -13,7 +13,7 @@ pipeline {
         stage('Restart EC2 Instance') {
             steps {
                 script {
-                        sshagent(['ssh']) {
+                        sshagent(['SSH-Ubuntu']) {
                             sh """
                                 ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH} ${SSH_USER}@${EC2_PUBLIC_IP} 'sudo systemctl restart tomcat'
 '
