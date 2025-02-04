@@ -21,7 +21,7 @@ pipeline {
                     sh '''
                     sudo apt update
                     sudo apt install -y ansible python3
-                    pip3 install --user ansible
+                    sudo pip3 install --user ansible
                     '''
                 }
             }
