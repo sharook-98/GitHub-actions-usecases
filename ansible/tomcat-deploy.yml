@@ -31,7 +31,7 @@
     - name: Create symlink to tomcat
       file:
         src: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
-        dest: "{{ tomcat_install_dir }}/current"
+        dest: "{{ tomcat_install_dir }}"
         state: link
 
     - name: Set permissions for tomcat directory
