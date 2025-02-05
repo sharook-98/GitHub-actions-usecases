@@ -37,11 +37,12 @@
     - name: Set permissions for tomcat directory
       file:
         path: "{{ tomcat_install_dir }}/current"
-        recurse: yes
+        #recurse: yes
         owner: root
         group: root
         mode: '0777'
-        follow: yes
+        #follow: yes
+        state: link
 
     - name: Start Tomcat
       service:
