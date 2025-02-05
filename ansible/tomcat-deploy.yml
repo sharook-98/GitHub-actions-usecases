@@ -44,7 +44,8 @@
         follow: yes
 
     - name: Start Tomcat
-      systemd:
+      service:
         name: tomcat
         state: started
-        enabled: yes
+      become: yes
+
