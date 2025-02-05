@@ -49,9 +49,4 @@
       become: yes
 
 
-    - name: Start Tomcat
-      service:
-        name: tomcat
-        state: started
-      become: yes
-
+  
