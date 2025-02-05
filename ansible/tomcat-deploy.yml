@@ -36,11 +36,12 @@
 
     - name: Set permissions for tomcat directory
       file:
-        path: "{{ tomcat_install_dir }}/current"
+        path: "{{ tomcat_install_dir }}"
         recurse: yes
         owner: root
         group: root
         mode: '0777'
+        follow: yes
 
     - name: Start Tomcat
       systemd:
