@@ -44,9 +44,14 @@
         #follow: yes
         state: link
 
+    - name: Start Tomcat using the startup script
+      command: /opt/tomcat/bin/startup.sh
+      become: yes
+
+
     - name: Start Tomcat
       service:
-        name: tomcat
+        name: tomcat9
         state: started
       become: yes
 
