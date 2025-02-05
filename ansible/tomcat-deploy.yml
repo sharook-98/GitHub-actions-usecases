@@ -51,7 +51,7 @@
 
     - name: Start Tomcat
       service:
-        name: tomcat9
+        name: tomcat
         state: started
       become: yes
 
